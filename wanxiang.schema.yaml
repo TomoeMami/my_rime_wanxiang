@@ -224,7 +224,7 @@ translator:
 # 自定义短语
 custom_phrase:
   dictionary: ""
-  user_dict: custom_phrase  #需要手动创建 custom_phrase.txt 文件
+  user_dict: tomoe_phrase  #需要手动创建 tomoe_phrase.txt 文件
   db_class: tabledb         #可设 tabledb〔文本〕或 userdb〔二进制〕
   enable_completion: false  #补全提示
   enable_sentence: false    #禁止造句
