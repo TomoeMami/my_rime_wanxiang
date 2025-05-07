@@ -67,9 +67,9 @@ engine:
     - predictor                                 #联想处理器
     - chord_composer                            #并击处理器
     - lua_processor@*select_character           # 以词定字
-    - lua_processor@*quick_symbol_text          #快符引导以及重复上屏
-    - lua_processor@*super_tips*S               #超级提示模块：表情、简码、翻译、化学式、等等靠你想象
     - lua_processor@*super_sequence*P           #手动排序，高亮候选 ctrl+j左移动 ctrl+k 右移动 ctrl+0 移除位移
+    - lua_processor@*quick_symbol_text          #快符引导以及重复上屏
+    #- lua_processor@*super_tips*S               #超级提示模块：表情、简码、翻译、化学式、等等靠你想象
     - lua_processor@*limit_repeated             #用于限制最大候选长度以及最大重复输入声母编码长度，避免性能异常
     - lua_processor@*userdb_sync_delete         #通过输入 /del 触发,用于清理自定义同步目录下txt用户词典里被标记c<0的词条
     - ascii_composer
@@ -211,7 +211,7 @@ translator:
 # 自定义短语
 custom_phrase:
   dictionary: ""
-  user_dict: tomoe_phrase  # 需要手动创建 custom_phrase.txt 文件
+  user_dict: tomoe_phrase  # 需要手动创建 tomoe_phrase.txt 文件
   db_class: stabledb
   enable_completion: false # 补全提示
   enable_sentence: false   # 禁止造句
@@ -290,31 +290,6 @@ reverse_stroke:
   preedit_format:
     - xlit/hspnz/一丨丿丶乙/
 
-user_dict_set:
-  dictionary: wanxiang
-  initial_quality: 0
-  enable_completion: false
-  enable_sentence: false
-  spelling_hints: 100
-  comment_format:
-  enable_user_dict: true
-  user_dict: zc
-# 自定义词典加词(ac引导)
-add_user_dict:
-  tag: add_user_dict
-  dictionary: wanxiang
-  initial_quality: -1
-  user_dict: zc
-  enable_charset_filter: false # 是否开启字符集过滤
-  enable_completion: true # 提前显示尚未输入完整码的字〔仅 table_translator 有效〕
-  enable_encoder: true # 是否开启自动造词〔仅 table_translator 有效〕
-  enable_sentence: true #  是否开启自动造句
-  enable_user_dict: true
-  encode_commit_history: false # 是否对已上屛词自动成词〔仅 table_translator 有效〕
-  preedit_format:   
-  comment_format:
-  prefix: "ac"
-  tips: "〔自造词〕"
 # 部件拆字滤镜
 radical_reverse_lookup:
   tags: [ radical_lookup,reverse_stroke ]
@@ -982,7 +957,33 @@ speller:
 26键:          
   __append: []
 
+user_dict_set:
+  dictionary: wanxiang
+  initial_quality: 0
+  enable_completion: false
+  enable_sentence: false
+  spelling_hints: 100
+  comment_format:
+  enable_user_dict: true
+  user_dict: zc
 
+
+  # 自定义词典加词(ac引导)
+add_user_dict:
+  tag: add_user_dict
+  dictionary: wanxiang
+  initial_quality: -1
+  user_dict: zc
+  enable_charset_filter: false # 是否开启字符集过滤
+  enable_completion: true # 提前显示尚未输入完整码的字〔仅 table_translator 有效〕
+  enable_encoder: true # 是否开启自动造词〔仅 table_translator 有效〕
+  enable_sentence: true #  是否开启自动造句
+  enable_user_dict: true
+  encode_commit_history: false # 是否对已上屛词自动成词〔仅 table_translator 有效〕
+  preedit_format:   
+  comment_format:
+  prefix: "ac"
+  tips: "〔自造词〕"
 #语法模型
 octagram:
   __patch:
