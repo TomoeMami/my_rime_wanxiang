@@ -167,7 +167,7 @@ function UserDictCleaner_process(key_event, env)
     end
 
     -- 仅在初始化且输入为 /del 时执行清理
-    if context.input == "/del" and env.initialized then
+    if context.input == "<del" and env.initialized then
         env.total_deleted = 0
         pcall(trigger_sync_cleanup, env)
         send_user_notification(env.total_deleted, env, true)  -- 可选：即使0也提示
