@@ -89,6 +89,7 @@ engine:
     - abc_segmentor
     - affix_segmentor@radical_lookup  # 部件拆字自定义 tag
     - affix_segmentor@reverse_stroke  #笔画反查
+    - affix_segmentor@add_user_dict
     - punct_segmentor
     - fallback_segmentor
   translators:
@@ -105,6 +106,8 @@ engine:
     - table_translator@chengyu           # 简码成语
     - table_translator@radical_lookup    # 部件拆字反查
     - table_translator@reverse_stroke    #笔画反查
+    - script_translator@user_dict_set
+    - script_translator@add_user_dict
     - lua_translator@*force_gc          # 暴力 GC 降低内存
   filters:
     - lua_filter@*super_sequence*F                  #手动排序，高亮候选 ctrl+j左移动 ctrl+k 右移动 ctrl+0 移除位移
@@ -194,9 +197,7 @@ translator:
   enable_completion: true  # 启用候选词补全
 #  user_dict: zrm.userdb  # 用户词典的文件名称
 #  db_class: tabledb  #开启后就不会产生wanxiang.userdb这样的文件夹，会直接输出文本wanxiang.txt同时无法使用同步能力
-  enable_user_dict: true # 是否开启自动调频
-  enable_encoder: true
-  enable_sentence: false
+  enable_user_dict: false # 是否开启自动调频
   enable_correction: false #是否开启自动纠错
   encode_commit_history: true   # 预留历史上屏自动编码成词
   initial_quality: 3       # 初始质量拼音的权重应该比英文大
@@ -301,7 +302,31 @@ reverse_stroke:
   preedit_format:
     - xlit/hspnz/一丨丿丶乙/
 
-
+user_dict_set:
+  dictionary: wanxiang
+  initial_quality: 0
+  enable_completion: false
+  enable_sentence: false
+  spelling_hints: 100
+  comment_format:
+  enable_user_dict: true
+  user_dict: zc
+# 自定义词典加词(ac引导)
+add_user_dict:
+  tag: add_user_dict
+  dictionary: wanxiang
+  initial_quality: -1
+  user_dict: zc
+  enable_charset_filter: false # 是否开启字符集过滤
+  enable_completion: true # 提前显示尚未输入完整码的字〔仅 table_translator 有效〕
+  enable_encoder: true # 是否开启自动造词〔仅 table_translator 有效〕
+  enable_sentence: true #  是否开启自动造句
+  enable_user_dict: true
+  encode_commit_history: false # 是否对已上屛词自动成词〔仅 table_translator 有效〕
+  preedit_format:   
+  comment_format:
+  prefix: "ac"
+  tips: "〔自造词〕"
 # 部件拆字滤镜
 radical_reverse_lookup:
   tags: [ radical_lookup,reverse_stroke ]
