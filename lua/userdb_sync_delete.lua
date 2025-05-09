@@ -115,8 +115,8 @@ function UserDictCleaner_process(key_event, env)
     local context = engine.context
     local input = context.input
 
-    -- 检查是否输入 |del
-    if input == "|del" and env.initialized then
+    -- 检查是否输入 <del
+    if input == "<del" and env.initialized then
         env.total_deleted = 0  -- 重置计数器
 
         pcall(trigger_sync_cleanup, env)
