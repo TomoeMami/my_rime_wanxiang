@@ -90,6 +90,7 @@ engine:
     - abc_segmentor                             #标识常规的文字段落，加上 abc 这个 tag
     - affix_segmentor@radical_lookup            #部件拆字自定义 tag
     - affix_segmentor@reverse_stroke            #笔画反查自定义 tag
+    - affix_segmentor@add_user_dict
     - punct_segmentor                           #标识符号段落〔键入标点符号用〕加上 punct 这个 tag
     - fallback_segmentor                        #标识其他未标识段落，必须放在最后帮助tag模式切换后回退重新处理
   translators:
@@ -106,6 +107,8 @@ engine:
     - table_translator@chengyu           #简码成语词汇表导入
     - table_translator@radical_lookup    #挂接部件拆字反查
     - table_translator@reverse_stroke    #挂接笔画反查
+    - script_translator@user_dict_set
+    - script_translator@add_user_dict
     - lua_translator@*force_gc           #暴力 GC 降低内存
   filters:
     - lua_filter@*super_sequence*F                  #手动排序，高亮候选 ctrl+j左移动 ctrl+k 右移动 ctrl+0 移除位移
@@ -975,6 +978,11 @@ user_dict_set:
   enable_sentence: false
   spelling_hints: 100
   comment_format:
+  preedit_format:     #影响到输入框的显示和“Shift+回车”上屏的字符，交给super_preedit_pro处理
+    - xform/7/1/
+    - xform/8/2/
+    - xform/9/3/
+    - xform/0/4/
   enable_user_dict: true
   user_dict: zc
 
