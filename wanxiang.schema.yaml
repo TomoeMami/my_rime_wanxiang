@@ -578,7 +578,7 @@ speller:
     - xform/^(.*)ń(.*)$/$1n$2②/
     - xform/^(.*)ň(.*)$/$1n$2③/
     - xform/^(.*)ǹ(.*)$/$1n$2④/
-    - xlit/①②③④/7890/
+    - xlit/①②③④/0987/
     - derive/^ng(\d)$/eng$1/
     - xform/^n(\d)/en$1/
     - derive/^([jqxy])u(\d)$/$1v$2/
