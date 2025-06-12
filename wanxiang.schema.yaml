@@ -101,7 +101,7 @@ engine:
     - table_translator@custom_phrase     #自定义短语 custom_phrase.txt，用于置顶自定义编码候选词
     - table_translator@wanxiang_en       #挂接英文输入，参与中英混输
     - table_translator@cn_en             #中英混合词汇表导入
-    - table_translator@chengyu           #简码成语词汇表导入
+    # - table_translator@chengyu           #简码成语词汇表导入
     - table_translator@radical_lookup    #挂接部件拆字反查
     - table_translator@reverse_stroke    #挂接笔画反查
     - script_translator@add_user_dict    #按需自造词
