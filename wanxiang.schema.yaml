@@ -205,9 +205,9 @@ translator:
   enable_completion: true      # 启用候选词补全
 #  user_dict: zrm.userdb       # 用户词典的文件名称
 #  db_class: tabledb           #开启后就不会产生wanxiang.userdb这样的文件夹，会直接输出文本wanxiang.txt同时无法使用同步能力，可设 tabledb〔文本〕或 userdb〔二进制〕
-  enable_user_dict: true       # 是否开启自动调频，即开启用户词典
-  enable_encoder: true         #是否开启自动造词
-  enable_sentence: false       #是否开启自动造句
+  enable_user_dict: false       # 是否开启自动调频，即开启用户词典
+  # enable_encoder: false         #是否开启自动造词
+  # enable_sentence: false       #是否开启自动造句
   enable_correction: false     #是否开启自动纠错
   encode_commit_history: true  # 预留历史上屏自动编码成词
   initial_quality: 3           #初始质量拼音的权重应该比英文大
@@ -220,7 +220,7 @@ translator:
     - xform/9/2/
     - xform/0/1/
   #disable_user_dict_for_patterns:  #如果你开启调频，需要一并考虑这个配置是否需要，基本的6码3字不调频，你可以自定义，目前的逻辑是依然记录用户词但满足规则的不输出不被使用
-  #  - "^[a-z]{1,6}"
+  #  - "^[a-z]{1,4}"
 
 # 自定义短语
 custom_phrase:
@@ -333,7 +333,7 @@ recognizer:
     lunar: "^N[0-9]{1,8}"               # N 作为触发前缀，响应 lua_translator@shijian，公历转农历，输入 N20250515 得到「二〇二五年五月十五」
     calculator: "^V.*$"                 # V 作为触发前缀，计算器功能引导
     quick_symbol: "^;.*$"               # ; 作为触发前缀，快符引导，例如输入;q 后自动上屏快速符号，双击;;重复上屏
-    #add_user_dict: "^ac[A-Za-z/`']*$"      #自造词引导方式
+    add_user_dict: "^``[A-Za-z/`']*$"      #自造词引导方式
 # 标点符号
 # punctuator 下面有三个子项：
 # 设置为一个映射，就自动上屏；设置为多个映射，如 '/' : [ '/', ÷ ] 则进行复选。
@@ -362,16 +362,16 @@ key_binder:
   #当输入编码后发现没有词，则通过双击``进入造词模式而且不需要删除编码，这个功能与``直接引导相呼应相配合
     - { match: "^.*`$", accept: "`", send_sequence: '{BackSpace}{Home}{`}{`}{End}' }
 editor:
-   bindings:
-     space: confirm                        # 空格键：上屏候选项
-     Return: commit_raw_input              # 回车键：上屏原始输入
-     Control+Return: commit_script_text    # Ctrl+回车键：上屏变换后输入（经过 preedit转换的）
-     Control+Shift+Return: commit_comment  # Ctrl+Shift+回车键：上屏 comment
-     BackSpace: revert                     # 退格键：向前删除（撤消上次输入）
-     Delete: delete                        # Delete 键：向后删除
-     Control+BackSpace: back_syllable      # Ctrl+退格键：删除一个音节
-     Control+Delete: delete_candidate      # Ctrl+Delete键：删除或降权候选项
-     Escape: cancel                        # Esc 键：取消输入
+  bindings:
+    space: confirm                        # 空格键：上屏候选项
+    Return: commit_raw_input              # 回车键：上屏原始输入
+    Control+Return: commit_script_text    # Ctrl+回车键：上屏变换后输入（经过 preedit转换的）
+    Control+Shift+Return: commit_comment  # Ctrl+Shift+回车键：上屏 comment
+    BackSpace: revert                     # 退格键：向前删除（撤消上次输入）
+    Delete: delete                        # Delete 键：向后删除
+    Control+BackSpace: back_syllable      # Ctrl+退格键：删除一个音节
+    Control+Delete: delete_candidate      # Ctrl+Delete键：删除或降权候选项
+    Escape: cancel                        # Esc 键：取消输入
 
 # 拼写设定
 speller:
@@ -1079,7 +1079,7 @@ user_dict_set:
     - xform/8/2/
     - xform/9/3/
     - xform/0/4/
-  enable_user_dict: false
+  enable_user_dict: true
   user_dict: zc
 # 自定义词典加词(``引导)
 add_user_dict:
@@ -1091,7 +1091,7 @@ add_user_dict:
   enable_completion: true # 提前显示尚未输入完整码的字〔仅 table_translator 有效〕
   enable_encoder: true # 是否开启自动造词〔仅 table_translator 有效〕
   enable_sentence: true #  是否开启自动造句
-  enable_user_dict: false
+  enable_user_dict: true
   encode_commit_history: false # 是否对已上屛词自动成词〔仅 table_translator 有效〕  
   comment_format:
   prefix: "``"
